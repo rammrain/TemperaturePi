@@ -1,8 +1,8 @@
 from Sender import *
 from Config import *
 
-a = Config()
+config = Config()
 
-b = Sender(a)
+sender = Sender(config)
 
-b.send(12, 1)
+sender.send(12.175, 1)
