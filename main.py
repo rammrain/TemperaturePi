@@ -1,5 +1,6 @@
 from Sender import *
 from Config import *
+from Sensor import *
 import os
 
 os.system("sudo modprobe w1-gpio")
@@ -10,7 +11,12 @@ sender = Sender(config)
 
 for dirname, dirnames, filenames in os.walk("/sys/bus/w1/devices"):
     for subdirname in dirnames:
-        print(subdirname)
+        if (subdirname != "w1_bus_master1"):
+            sensor = Sensor(subdirname)
+            temp = sensor.getTemp()
+            sender.send(temp, 1)
+            
+            print(sensor.getTemp())
 
 
 
