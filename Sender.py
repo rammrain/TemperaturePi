@@ -14,4 +14,5 @@ class Sender:
             'temperature': temperature
         }
         
-        r = requests.get(self.config.requestUrl, params=requestParams)               
+        return requests.get(self.config.requestUrl, params=requestParams)
+
