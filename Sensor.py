@@ -25,6 +25,8 @@ class Sensor:
         self.text = tfile.read()
         tfile.close()
 
+        print(self.text)
+
         return True
 
     def is_error(self):
