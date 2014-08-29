@@ -1,5 +1,5 @@
 import requests
-from Config import *
+
 
 class Sender:
     config = 0
@@ -8,10 +8,10 @@ class Sender:
         self.config = config
 
     def send(self, temperature, sensor):
-        requestParams = {
+        request_params = {
             'hash': self.config.apiHash,
             'sensor': sensor,
             'temperature': temperature
         }
-        
-        r = requests.get(self.config.requestUrl, params=requestParams)               
+
+        r = requests.get(self.config.requestUrl, params=request_params)

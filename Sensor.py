@@ -8,32 +8,29 @@ class Sensor:
     def __init__(self, serial):
         self.serial = serial
 
-    def getTemp(self, times = 0):
+    def get_temp(self, times=0):
 
-        if (times == self.retryLimit):
+        if times == self.retryLimit:
             return False
 
-        self.readFile()
-        if (self.isError()):
+        self.read_file()
+        if self.is_error():
             times += 1
-            return self.getTemp(times)
+            return self.get_temp(times)
 
-        return self.getTemperatureFloat()
+        return self.get_temperature_float()
 
-    def readFile(self):
+    def read_file(self):
         tfile = open("/sys/bus/w1/devices/" + self.serial + "/w1_slave")
         self.text = tfile.read()
         tfile.close()
 
         return True
 
-    def isError(self):
-        if (self.text.split("\n")[0].split(" ")[11] == "NO"):
-            return True
-        return False
+    def is_error(self):
+        return self.text.split("\n")[0].split(" ")[11] == "NO"
 
-    def getTemperatureFloat(self):
-        rawTemp = self.text.split("\n")[1].split(" ")[9]
+    def get_temperature_float(self):
+        raw_temp = self.text.split("\n")[1].split(" ")[9]
 
-        return float(rawTemp[2:]) / 1000
-
+        return float(raw_temp[2:]) / 1000
