@@ -16,8 +16,8 @@ for dirname, dirnames, filenames in os.walk("/sys/bus/w1/devices"):
         if subdirname != "w1_bus_master1":
             sensor = Sensor(subdirname)
             temp = sensor.get_temp()
-            sender.send(temp, 1)
-            
-            print(sensor.get_temp())
             response = sender.send(temp, Config.sensorMap[subdirname])
+
+            # debug
+            print(sensor.get_temp())
             print(response.status_code)
