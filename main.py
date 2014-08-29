@@ -19,5 +19,5 @@ for dirname, dirnames, filenames in os.walk("/sys/bus/w1/devices"):
             response = sender.send(temp, Config.sensorMap[subdirname])
 
             # debug
-            print(sensor.get_temp())
+            print(temp)
             print(response.status_code)
